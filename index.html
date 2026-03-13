@@ -9,6 +9,7 @@
             --selar-purple: #5a1a5a;
             --success-green: #00a651;
             --error-red: #d9534f;
+            --airtel-red: #ff0000;
             --text-gray: #777;
         }
 
@@ -117,13 +118,26 @@
             background: rgba(255,0,0,0.02);
         }
 
-        /* Payment Card - UPDATED WITH NOTIFICATION CONTENT */
+        /* Payment Card */
         .payment-card {
             border: 1px solid #eee;
             border-radius: 25px;
             padding: 20px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             text-align: left;
+        }
+
+        .airtel-heading {
+            background: var(--airtel-red);
+            color: white;
+            padding: 10px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 12px;
+            font-weight: 800;
+            font-size: 14px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 6px rgba(255, 0, 0, 0.2);
         }
 
         .notif-header {
@@ -197,6 +211,10 @@
     </div>
 
     <div class="payment-card">
+        <div class="airtel-heading">
+            Currently supports Airtel Sim card UGA <span class="blink-animation">🇺🇬</span>
+        </div>
+
         <div class="notif-header">
             How to pay Fx charge [Use Merchant ID~6837633]
         </div>

